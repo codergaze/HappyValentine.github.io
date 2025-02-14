@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scrolling Gallery</title>
+    <style>
+        body {
+            background-color: pink;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        .gallery {
+            width: 80%;
+            margin: 50px auto;
+        }
+        .image-container {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            margin-bottom: 20px;
+        }
+        .image-container img {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 10px;
+        }
+        .image-container p {
+            font-size: 16px;
+            color: black;
+        }
+        .visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="gallery">
+        <div class="image-container">
+            <img src="images/image1.jpg" alt="Image 1">
+            <p>Caption for Image 1</p>
+        </div>
+        <div class="image-container">
+            <img src="images/image2.jpg" alt="Image 2">
+            <p>Caption for Image 2</p>
+        </div>
+        <div class="image-container">
+            <img src="images/image3.jpg" alt="Image 3">
+            <p>Caption for Image 3</p>
+        </div>
+        <div class="image-container">
+            <img src="images/image4.jpg" alt="Image 4">
+            <p>Caption for Image 4</p>
+        </div>
+        <div class="image-container">
+            <img src="images/image5.jpg" alt="Image 5">
+            <p>Caption for Image 5</p>
+        </div>
+        <div class="image-container">
+            <img src="images/image6.jpg" alt="Image 6">
+            <p>Caption for Image 6</p>
+        </div>
+    </div>
+    <h2 style="opacity: 0; transition: opacity 1s ease-in;" id="valentine-message">Happy Valentine's</h2>
+
+    <script>
+        document.addEventListener("scroll", function() {
+            let images = document.querySelectorAll(".image-container");
+            images.forEach(image => {
+                let rect = image.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 100) {
+                    image.classList.add("visible");
+                }
+            });
+            
+            let lastImage = images[images.length - 1];
+            if (lastImage.getBoundingClientRect().top < window.innerHeight - 100) {
+                document.getElementById("valentine-message").style.opacity = 1;
+            }
+        });
+    </script>
+</body>
